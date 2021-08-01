@@ -1,0 +1,172 @@
+version: "2.0"
+
+stories:
+- story: prospective customer path (happy path)
+  steps:
+  - intent: prospective_customer
+  - action: utter_prospective_customer
+  - intent: affirm
+  - action: quote_form
+  - active_loop: quote_form
+  - active_loop: null
+  - action: action_get_quote
+  - action: utter_accept_quote
+  - intent: affirm
+  - action: utter_confirm_quote
+- story: prospective customer path (unhappy path)
+  steps:
+  - intent: prospective_customer
+  - action: utter_prospective_customer
+  - intent: deny
+  - action: utter_another_time
+- story: prospective customer path (unhappy path)
+  steps:
+  - intent: prospective_customer
+  - action: utter_prospective_customer
+  - intent: affirm
+  - action: quote_form
+  - active_loop: quote_form
+  - active_loop: null
+  - action: action_get_quote
+  - action: utter_accept_quote
+  - intent: deny
+  - action: utter_another_time
+- story: existing customer path (happy path)
+  steps:
+  - intent: existing_customer
+  - action: policy_number_form
+  - active_loop: policy_number_form
+  - active_loop: null
+  - action: action_get_customer_data
+  - action: utter_existing_customer
+- story: existing customer renewal quote path (happy path)
+  steps:
+  - intent: renewal_quote
+  - action: utter_existing_details
+  - intent: affirm
+  - action: action_get_renewal_quote
+  - action: utter_accept_quote
+  - intent: affirm
+  - action: utter_confirm_quote
+- story: existing customer renewal quote path where details need to be changed (happy path)
+  steps:
+  - intent: renewal_quote
+  - action: utter_existing_details
+  - intent: deny
+  - action: action_stop_quote
+  - action: quote_form
+  - active_loop: quote_form
+  - active_loop: null
+  - action: action_get_renewal_quote
+  - action: utter_accept_quote
+  - intent: affirm
+  - action: utter_confirm_quote
+- story: existing customer renewal quote but then doesn't purchase insurance path
+  steps:
+  - intent: renewal_quote
+  - action: utter_existing_details
+  - intent: affirm
+  - action: action_get_renewal_quote
+  - action: utter_accept_quote
+  - intent: deny
+  - action: utter_another_time
+- story: existing customer register claim path (happy path)
+  steps:
+  - intent: register_claim
+  - action: utter_claim type
+- story: register an accident damage claim with courtesy car required
+  steps:
+  - intent: register_accident_damage_claim
+  - action: utter_booked_vehicle_in_for_repair
+  - action: utter_courtesy_car_required
+  - intent: affirm
+  - action: utter_courtesy_car_booked
+  - action: utter_provide_claim_reference_number
+- story: register an accident damage claim no courtesy car required
+  steps:
+  - intent: register_accident_damage_claim
+  - action: utter_booked_vehicle_in_for_repair
+  - action: utter_courtesy_car_required
+  - intent: deny
+  - action: utter_provide_claim_reference_number
+- story: register an theft claim with courtesy car required
+  steps:
+  - intent: register_theft_claim
+  - action: utter_courtesy_car_required
+  - intent: affirm
+  - action: utter_courtesy_car_booked
+  - action: utter_provide_claim_reference_number
+- story: register an theft claim no courtesy car required
+  steps:
+  - intent: register_theft_claim
+  - action: utter_courtesy_car_required
+  - intent: deny
+  - action: utter_provide_claim_reference_number
+- story: register an fire claim with courtesy car required
+  steps:
+  - intent: register_fire_claim
+  - action: utter_booked_vehicle_in_for_repair
+  - action: utter_courtesy_car_required
+  - intent: affirm
+  - action: utter_courtesy_car_booked
+  - action: utter_provide_claim_reference_number
+- story: register an accident damage claim no courtesy car required
+  steps:
+  - intent: register_fire_claim
+  - action: utter_booked_vehicle_in_for_repair
+  - action: utter_courtesy_car_required
+  - intent: deny
+  - action: utter_provide_claim_reference_number
+- story: register an vandalism claim with courtesy car required
+  steps:
+  - intent: register_vandalism_claim
+  - action: utter_booked_vehicle_in_for_repair
+  - action: utter_courtesy_car_required
+  - intent: affirm
+  - action: utter_courtesy_car_booked
+  - action: utter_provide_claim_reference_number
+- story: register an accident damage claim no courtesy car required
+  steps:
+  - intent: register_vandalism_claim
+  - action: utter_booked_vehicle_in_for_repair
+  - action: utter_courtesy_car_required
+  - intent: deny
+  - action: utter_provide_claim_reference_number
+- story: register an other claim with courtesy car required
+  steps:
+  - intent: register_other_claim
+  - action: utter_booked_vehicle_in_for_repair
+  - action: utter_courtesy_car_required
+  - intent: affirm
+  - action: utter_courtesy_car_booked
+  - action: utter_provide_claim_reference_number
+- story: register an accident damage claim no courtesy car required
+  steps:
+  - intent: register_other_claim
+  - action: utter_booked_vehicle_in_for_repair
+  - action: utter_courtesy_car_required
+  - intent: deny
+  - action: utter_provide_claim_reference_number
+- story: existing customer check claim status path (happy path)
+  steps:
+  - intent: check_claim_status
+  - action: claim_id_form
+#  - active_loop: claim_id_form
+#  - active_loop: null
+  - action: action_get_claim_data
+  - action: action_get_claim_status
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

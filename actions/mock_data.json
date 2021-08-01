@@ -1,0 +1,30 @@
+{
+    "policy_data": {
+        "11111111":{
+            "AGE": 25,
+            "LICENCE_YEARS": 5,
+            "FIRST_NAME": "Jane",
+            "SURNAME_NAME": "Brown",
+            "CURRENT_PREMIUM": 500
+        },
+        "99999999":{
+            "AGE": 65,
+            "LICENCE_YEARS": 45,
+            "FIRST_NAME": "John",
+            "SURNAME_NAME": "Brown",
+            "CURRENT_PREMIUM": 400
+        }
+    },
+    "claims_data": {
+        "AB1234":{
+            "CLAIM_DATE": "25/01/21",
+            "CLAIM_STATUS": "Paid",
+            "CLAIM_BALANCE": 0
+        },
+        "AB4321":{
+            "CLAIM_DATE": "01/08/21",
+            "CLAIM_STATUS": "Processing",
+            "CLAIM_BALANCE": 3000
+        }
+    }
+}

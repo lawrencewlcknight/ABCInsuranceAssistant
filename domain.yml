@@ -1,0 +1,219 @@
+version: '0.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet:
+    use_entities: true
+- existing_customer:
+    use_entities: true
+- prospective_customer:
+    use_entities: true
+- provide_age:
+    use_entities: true
+- provide_licence_years:
+    use_entities: true
+- renewal_quote:
+    use_entities: true
+- register_claim:
+    use_entities: true
+- check_claim_status:
+    use_entities: true
+- register_accident_damage_claim:
+    use_entities: true
+- register_theft_claim:
+    use_entities: true
+- register_fire_claim:
+    use_entities: true
+- register_vandalism_claim:
+    use_entities: true
+- register_other_claim:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- affirm:
+    use_entities: true
+- deny:
+    use_entities: true
+- mood_great:
+    use_entities: true
+- mood_unhappy:
+    use_entities: true
+- bot_challenge:
+    use_entities: true
+entities: []
+slots:
+  AGE:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  LICENCE_YEARS:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  FIRST_NAME:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  SURNAME_NAME:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  POLICY_NUMBER:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  CURRENT_PREMIUM:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  CLAIM_ID:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  CLAIM_DATE:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  CLAIM_STATUS:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  CLAIM_BALANCE:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses:
+  utter_greet:
+  - buttons:
+    - payload: /existing_customer
+      title: I'm an existing customer
+    - payload: /prospective_customer
+      title: I'm a prospective customer
+    text: Hi, I'm Tom, ABCInsurance's AI powered assistant. To allow me to assist you futher please select from the following
+  utter_prospective_customer:
+  - text: I can help you with a new car insurance quote.  Would you like to proceed?
+  utter_ask_quote_form_AGE:
+  - text: Please enter your age. For example if you are thirty two then enter 32.
+  utter_ask_quote_form_LICENCE_YEARS:
+  - text: Please enter the number of years you have held your licence. For example if you have held your licence for ten years then enter 10.
+  utter_final_quote:
+  - text: |-
+      Your annual premium given the information provided is: £{final_quote}
+
+      Age of policy holder: {AGE}
+      Number of years licence held: {LICENCE_YEARS}
+  utter_accept_quote:
+  - text: Would you like to proceed with the quote?
+  utter_confirm_quote:
+  - text: Great, we'll arrange to take payment and then get you policy details over to you pronto!
+  utter_another_time:
+  - text: That's a shame.  We would love to do business with you so please drop by another time.
+  utter_ask_policy_number_form_POLICY_NUMBER:
+  - text: To allow me to access you details please enter your eight digit policy numer.
+  utter_existing_customer:
+  - buttons:
+    - payload: /renewal_quote
+      title: Renewal Quote
+    - payload: /register_claim
+      title: Register Claim
+    - payload: /check_claim_status
+      title: Check Existing Claim Status
+    text: Hi {FIRST_NAME}, what can I help you with today?
+  utter_existing_details:
+  - text: |-
+      The details that that I have on file for you are as following. Are these correct?
+
+      Age of policy holder: {AGE}
+      Number of years licence held: {LICENCE_YEARS}
+  utter_renewal_quote:
+  - text: |-
+      Your annual premium given the information provided is: £{final_quote}
+
+      Your current annual premium is: £{CURRENT_PREMIUM}
+      Age of policy holder: {AGE}
+      Number of years licence held: {LICENCE_YEARS}
+  utter_claim type:
+  - buttons:
+    - payload: /register_accident_damage_claim
+      title: Accident
+    - payload: /register_theft_claim
+      title: Theft
+    - payload: /register_fire_claim
+      title: Fire
+    - payload: /register_vandalism_claim
+      title: Vandalism
+    - payload: /register_other_claim
+      title: Other
+    text: Please select the type of claim that you'd like to register.
+  utter_booked_vehicle_in_for_repair:
+  - text: We have book your vehicle in for repair at your local repair centre (all details etc provided).
+  utter_courtesy_car_required:
+  - text: Will you need a courtesy car?
+  utter_courtesy_car_booked:
+  - text: We have booked you a coutesy car and this will be dropped of at your house tomorrow morning.
+  utter_provide_claim_reference_number:
+  - text: 'Here is the claim reference number: AB4444. It can be used to track your claim.'
+  utter_ask_claim_id_form_CLAIM_ID:
+  - text: Please enter the claim id for the claim you'd like to check.
+  utter_claim_id_status:
+  - text: |-
+      The claim status details of claim: {CLAIM_ID}
+
+      Claim date: {CLAIM_DATE}
+      Status of the claim: {CLAIM_STATUS}
+      Outstanding balance: £{CLAIM_BALANCE}
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+actions:
+- validate_quote_form
+- action_get_quote
+- action_stop_quote
+- validate_policy_number_form
+- action_get_customer_data
+- action_get_renewal_quote
+- action_reset_slots
+- action_get_claim_data
+- action_get_claim_status
+forms:
+  quote_form:
+    required_slots:
+      AGE:
+      - entity: AGE
+        type: from_entity
+      - not_intent: stop
+        type: from_text
+      LICENCE_YEARS:
+      - entity: LICENCE_YEARS
+        type: from_entity
+      - not_intent: stop
+        type: from_text
+  policy_number_form:
+    required_slots:
+      POLICY_NUMBER:
+      - entity: POLICY_NUMBER
+        type: from_entity
+      - not_intent: stop
+        type: from_text
+  claim_id_form:
+    required_slots:
+      CLAIM_ID:
+      - entity: CLAIM_ID
+        type: from_entity
+      - not_intent: stop
+        type: from_text
+e2e_actions: []
