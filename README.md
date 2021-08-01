@@ -15,7 +15,7 @@ When the bot is activated it will require a greeting such as "Hello" for it to c
 in the conversational journey you want to reset the bot, issue another greeting.
 
 ## Run the Bot
-Before training your bot make sure you have installed all of the requirements from the requirements.txt file:
+Before training your bot make sure you have installed all of the requirements from the requirements.txt file into a Python 3.8 environment.
 
 ```
 pip3 install -r requirements.txt
