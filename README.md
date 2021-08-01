@@ -12,7 +12,7 @@ The current stage of development is limited and not much has been done to preven
 It should however be able to follow predefined tasks such as issuing a new business quote or retrieving the status of a claim.
 
 When the bot is activated it will require a greeting such as "Hello" for it to come to life.  If at any point 
-in the conversational journey you want to reset the bot issue another greeting.
+in the conversational journey you want to reset the bot, issue another greeting.
 
 ## Run the Bot
 Before training your bot make sure you have installed all of the requirements from the requirements.txt file:
